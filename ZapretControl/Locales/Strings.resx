@@ -150,6 +150,9 @@
   <data name="OpenListsFolder" xml:space="preserve">
     <value>Open lists folder</value>
   </data>
+  <data name="OpenServiceMenu" xml:space="preserve">
+    <value>Launch service.bat</value>
+  </data>
   <data name="Restart" xml:space="preserve">
     <value>Restart Zapret</value>
   </data>

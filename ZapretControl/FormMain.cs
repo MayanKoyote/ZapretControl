@@ -125,6 +125,18 @@ namespace ZapretControl
             //
             MI_Service.Text = Strings.Service;
             MI_SwitchIP.Text = Strings.SwitchIPSet;
+            MI_OpenServiceMenu.Text = Strings.OpenServiceMenu;
+        }
+
+        private async Task RefreshMode()
+        {
+            // Try get current IPSet mode
+            try
+            {
+                var mode = await ServiceProcess.GetCurrentIPSetMode();
+                MI_SwitchIP.Text = $"{Strings.SwitchIPSet} ({mode})";
+            }
+            catch (Exception) {/* Ignore */}
         }
 
         private void RefreshPath()
@@ -137,17 +149,6 @@ namespace ZapretControl
         private void RefreshUI()
         {
             B_Restart.Enabled = ZapretProcess.IsRunning;
-        }
-
-        private async Task RefreshMode()
-        {
-            // Try get current IPSet mode
-            try
-            {
-                var mode = await ServiceProcess.GetCurrentIPSetMode();
-                MI_SwitchIP.Text = $"{Strings.SwitchIPSet} ({mode})";
-            }
-            catch (Exception) {/* Ignore */}
         }
 
         private void ShowControl()
@@ -238,14 +239,6 @@ namespace ZapretControl
             Process.Start(new ProcessStartInfo(List) { UseShellExecute = true });
         }
 
-        private void MI_OpenListGeneral_Click(object sender, EventArgs e)
-        {
-            var List = Directory.EnumerateFiles(Constants.StartupPath, "list-general-user.txt", SearchOption.AllDirectories).FirstOrDefault();
-            if (List is null) return;
-
-            Process.Start(new ProcessStartInfo(List) { UseShellExecute = true });
-        }
-
         private void MI_OpenListFolder_Click(object sender, EventArgs e)
         {
             var Lists = Directory.EnumerateDirectories(Constants.StartupPath, "lists", SearchOption.AllDirectories).FirstOrDefault();
@@ -254,9 +247,24 @@ namespace ZapretControl
             Process.Start(new ProcessStartInfo(Lists) { UseShellExecute = true });
         }
 
+        private void MI_OpenListGeneral_Click(object sender, EventArgs e)
+        {
+            var List = Directory.EnumerateFiles(Constants.StartupPath, "list-general-user.txt", SearchOption.AllDirectories).FirstOrDefault();
+            if (List is null) return;
+
+            Process.Start(new ProcessStartInfo(List) { UseShellExecute = true });
+        }
+
         #endregion Lists
 
         #region Service
+
+        private void MI_OpenServiceMenu_Click(object sender, EventArgs e)
+        {
+            MI_OpenServiceMenu.Enabled = false;
+            ServiceProcess.OpenMenu();
+            MI_OpenServiceMenu.Enabled = true;
+        }
 
         private async void MI_SwitchIP_Click(object sender, EventArgs e)
         {

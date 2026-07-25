@@ -160,6 +160,15 @@ namespace ZapretControl.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Launch service.bat.
+        /// </summary>
+        internal static string OpenServiceMenu {
+            get {
+                return ResourceManager.GetString("OpenServiceMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Restart Zapret.
         /// </summary>
         internal static string Restart {

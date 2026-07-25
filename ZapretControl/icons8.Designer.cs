@@ -73,6 +73,16 @@ namespace ZapretControl {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Console16 {
+            get {
+                object obj = ResourceManager.GetObject("Console16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CopyToClipboard16 {
             get {
                 object obj = ResourceManager.GetObject("CopyToClipboard16", resourceCulture);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using ZapretControl.Extensions;
 using ZapretControl.Model;
 
 namespace ZapretControl
@@ -16,8 +17,8 @@ namespace ZapretControl
         private static readonly List<string> Buffer = new();
         private static readonly Regex IPSetRegex = new(@"ipset.*\[(?<mode>\w+)\]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly ControlSettings Settings = Config.Current;
+        private static Process Menu;
         private static Process Service;
-
         public static bool IsRunning => Service != null;
 
         public static Task<string> GetCurrentIPSetMode()
@@ -29,6 +30,19 @@ namespace ZapretControl
                 StopService();
                 return match?.Groups["mode"].Value;
             });
+        }
+
+        public static void OpenMenu()
+        {
+            if (!Menu?.HasExited ?? false)
+            {
+                Menu.BringToForeground();
+                return;
+            }
+
+            var startInfo = StartInfo();
+            Menu = new Process { StartInfo = startInfo };
+            Menu.Start();
         }
 
         public static Task SwitchIPSet()
@@ -103,6 +117,19 @@ namespace ZapretControl
             Debug.WriteLine(e.Data);
         }
 
+        private static ProcessStartInfo StartInfo()
+        {
+            var file = new FileInfo(Path.Combine(Settings.ZapretDirectory, "service.bat"));
+            return new ProcessStartInfo
+            {
+                FileName = file.FullName,
+                Arguments = "admin",
+                WorkingDirectory = file.DirectoryName,
+                UseShellExecute = false,
+                Verb = "runas"
+            };
+        }
+
         /// <summary>
         /// Starts the service process if it is not already running.
         /// </summary>
@@ -111,21 +138,14 @@ namespace ZapretControl
             if (IsRunning) { return; }
 
             Buffer.Clear();
-            var StartInfo = new ProcessStartInfo
-            {
-                FileName = Path.Combine(Settings.ZapretDirectory, "service.bat"),
-                Arguments = "admin",
-                WorkingDirectory = Settings.ZapretDirectory,
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                RedirectStandardInput = true,
-                Verb = "runas"
-            };
+            var startInfo = StartInfo();
+            startInfo.CreateNoWindow = true;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.RedirectStandardInput = true;
             Service = new Process
             {
-                StartInfo = StartInfo,
+                StartInfo = startInfo,
                 EnableRaisingEvents = true
             };
             Service.OutputDataReceived += Service_OutputDataReceived;

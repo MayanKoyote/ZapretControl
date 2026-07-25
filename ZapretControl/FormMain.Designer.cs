@@ -43,6 +43,7 @@
             MI_OpenListExclude = new System.Windows.Forms.ToolStripMenuItem();
             MI_About = new System.Windows.Forms.ToolStripMenuItem();
             MI_Service = new System.Windows.Forms.ToolStripMenuItem();
+            MI_OpenServiceMenu = new System.Windows.Forms.ToolStripMenuItem();
             MI_SwitchIP = new System.Windows.Forms.ToolStripMenuItem();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             B_Restart = new System.Windows.Forms.Button();
@@ -54,6 +55,8 @@
             radioButton1 = new System.Windows.Forms.RadioButton();
             radioButton2 = new System.Windows.Forms.RadioButton();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             TrayMenu.SuspendLayout();
             FormMenu.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -128,7 +131,7 @@
             // 
             // MI_Lists
             // 
-            MI_Lists.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MI_OpenListFolder, MI_OpenListGeneral, MI_OpenListExclude });
+            MI_Lists.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MI_OpenListFolder, toolStripSeparator2, MI_OpenListGeneral, MI_OpenListExclude });
             MI_Lists.Name = "MI_Lists";
             MI_Lists.Size = new System.Drawing.Size(42, 20);
             MI_Lists.Text = "Lists";
@@ -137,7 +140,7 @@
             // 
             MI_OpenListFolder.Image = icons8.OpenedFolder16;
             MI_OpenListFolder.Name = "MI_OpenListFolder";
-            MI_OpenListFolder.Size = new System.Drawing.Size(180, 22);
+            MI_OpenListFolder.Size = new System.Drawing.Size(161, 22);
             MI_OpenListFolder.Text = "OpenListsFolder";
             MI_OpenListFolder.Click += MI_OpenListFolder_Click;
             // 
@@ -145,7 +148,7 @@
             // 
             MI_OpenListGeneral.Image = icons8.Document16;
             MI_OpenListGeneral.Name = "MI_OpenListGeneral";
-            MI_OpenListGeneral.Size = new System.Drawing.Size(180, 22);
+            MI_OpenListGeneral.Size = new System.Drawing.Size(161, 22);
             MI_OpenListGeneral.Text = "OpenListGeneral";
             MI_OpenListGeneral.Click += MI_OpenListGeneral_Click;
             // 
@@ -153,7 +156,7 @@
             // 
             MI_OpenListExclude.Image = icons8.Document16;
             MI_OpenListExclude.Name = "MI_OpenListExclude";
-            MI_OpenListExclude.Size = new System.Drawing.Size(180, 22);
+            MI_OpenListExclude.Size = new System.Drawing.Size(161, 22);
             MI_OpenListExclude.Text = "OpenListExclude";
             MI_OpenListExclude.Click += MI_OpenListExclude_Click;
             // 
@@ -168,16 +171,24 @@
             // 
             // MI_Service
             // 
-            MI_Service.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MI_SwitchIP });
+            MI_Service.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MI_OpenServiceMenu, toolStripSeparator1, MI_SwitchIP });
             MI_Service.Name = "MI_Service";
             MI_Service.Size = new System.Drawing.Size(56, 20);
             MI_Service.Text = "Service";
+            // 
+            // MI_OpenServiceMenu
+            // 
+            MI_OpenServiceMenu.Image = icons8.Console16;
+            MI_OpenServiceMenu.Name = "MI_OpenServiceMenu";
+            MI_OpenServiceMenu.Size = new System.Drawing.Size(171, 22);
+            MI_OpenServiceMenu.Text = "OpenServiceMenu";
+            MI_OpenServiceMenu.Click += MI_OpenServiceMenu_Click;
             // 
             // MI_SwitchIP
             // 
             MI_SwitchIP.Image = icons8.Switch16;
             MI_SwitchIP.Name = "MI_SwitchIP";
-            MI_SwitchIP.Size = new System.Drawing.Size(180, 22);
+            MI_SwitchIP.Size = new System.Drawing.Size(171, 22);
             MI_SwitchIP.Text = "SwitchIPSet";
             MI_SwitchIP.Click += MI_SwitchIP_Click;
             // 
@@ -313,6 +324,16 @@
             tableLayoutPanel2.Size = new System.Drawing.Size(534, 254);
             tableLayoutPanel2.TabIndex = 7;
             // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -374,5 +395,8 @@
         private System.Windows.Forms.ToolStripMenuItem MI_OpenListFolder;
         private System.Windows.Forms.ToolStripMenuItem MI_OpenListGeneral;
         private System.Windows.Forms.ToolStripMenuItem MI_OpenListExclude;
+        private System.Windows.Forms.ToolStripMenuItem MI_OpenServiceMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
